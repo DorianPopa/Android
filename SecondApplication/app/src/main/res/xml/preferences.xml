@@ -1,0 +1,15 @@
+
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="Aspect">
+
+        <SwitchPreferenceCompat
+            app:key="pref_dark_theme"
+            app:title="Dark Theme"
+            app:useSimpleSummaryProvider="false"
+            app:summary="Enable/Disable dark theme" />
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/ItemId"
-        android:title="Item" />
+        android:id="@+id/SettingsButtonId"
+        android:onClick="openSettings"
+        android:title="Settings" />
+    <item
+        android:id="@+id/DialogButtonId"
+        android:onClick="openDialog"
+        android:title="Open Dialog" />
 </menu>
