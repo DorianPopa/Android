@@ -10,10 +10,38 @@
     <ListView
         android:id="@+id/lista1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="400dp"
         android:textColor="?attr/textColor"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <EditText
+        android:id="@+id/fileNameTextbox"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/lista1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:inputType="text"
+        android:hint="File Name"/>
+    <EditText
+        android:id="@+id/fileContentTextbox"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fileNameTextbox"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:inputType="text"
+        android:hint="File Content"/>
+    <Button
+        android:id="@+id/saveFileButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fileContentTextbox"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Save File"
+        android:onClick="writeFile"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

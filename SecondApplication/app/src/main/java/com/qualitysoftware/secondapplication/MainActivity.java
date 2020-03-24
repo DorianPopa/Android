@@ -1,16 +1,12 @@
 package com.qualitysoftware.secondapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.preference.PreferenceManager;
-
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,14 +14,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
     private ListView lista;
     private String[] stringList = {"chestie", "chestie2"};
     private ArrayAdapter<String> arrayAdapter;
+
+    EditText fileName;
+    EditText fileContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         lista.setAdapter(arrayAdapter);
         lista.setOnItemClickListener(messageClickedHandler);
 
+        fileName = findViewById(R.id.fileNameTextbox);
+        fileContent = findViewById(R.id.fileContentTextbox);
     }
 
 
@@ -105,6 +113,35 @@ public class MainActivity extends AppCompatActivity {
     public void openDialog(MenuItem item) {
         MyDialogFragment dialogFragment = new MyDialogFragment();
         dialogFragment.show(getSupportFragmentManager(), "Dialog");
+    }
+
+    public void writeFile(View v){
+        File textFile = new File(getFilesDir(), fileName.getText().toString());
+        try {
+            try {
+                FileInputStream fileInputStream = new FileInputStream(textFile);
+                byte[] currentFileContentByte = new byte[(int) fileInputStream.available()];
+                fileInputStream.read(currentFileContentByte);
+                String currentContentString = new String(currentFileContentByte);
+                fileInputStream.close();
+                if (currentContentString.equals(fileContent.toString())) {
+                    Toast.makeText(this, "File with the same content already exists", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+            catch(IOException e){
+
+            }
+
+            FileOutputStream fileOutputStream = new FileOutputStream(textFile);
+            fileOutputStream.write(fileContent.toString().getBytes());
+            fileOutputStream.close();
+
+            Toast.makeText(this, "File Saved", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }
 
