@@ -9,4 +9,8 @@
         android:id="@+id/DialogButtonId"
         android:onClick="openDialog"
         android:title="Open Dialog" />
+    <item
+        android:id="@+id/SensorsButtonId"
+        android:onClick="openSensors"
+        android:title="Sensors" />
 </menu>

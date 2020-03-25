@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -113,6 +111,11 @@ public class MainActivity extends AppCompatActivity {
     public void openDialog(MenuItem item) {
         MyDialogFragment dialogFragment = new MyDialogFragment();
         dialogFragment.show(getSupportFragmentManager(), "Dialog");
+    }
+
+    public void openSensors(MenuItem item){
+        Intent intent = new Intent(this, SensorsActivity.class);
+        startActivity(intent);
     }
 
     public void writeFile(View v){
