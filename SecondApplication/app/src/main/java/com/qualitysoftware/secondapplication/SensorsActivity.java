@@ -3,13 +3,14 @@ package com.qualitysoftware.secondapplication;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.provider.Settings;
@@ -24,6 +25,12 @@ public class SensorsActivity extends AppCompatActivity {
 
     private LocationManager locationManager;
     private LocationListener locationListener;
+
+    private SensorManager sensorManager;
+    private Sensor sAccelerometer, sGyro, sMagno, sPressure, sLight, sTemp;
+
+    TextView xValue, yValue, zValue, xGyroValue, yGyroValue, zGyroValue, xMagnoValue, yMagnoValue, zMagnoValue, light, pressure, temp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +63,24 @@ public class SensorsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         };
+
+        xValue = findViewById(R.id.xAccValue);
+        yValue = findViewById(R.id.yAccValue);
+        zValue = findViewById(R.id.zAccValue);
+
+        xGyroValue = findViewById(R.id.xGyroValue);
+        yGyroValue = findViewById(R.id.yGyroValue);
+        zGyroValue = findViewById(R.id.zGyroValue);
+
+        xMagnoValue = findViewById(R.id.xMagnoValue);
+        yMagnoValue = findViewById(R.id.yMagnoValue);
+        zMagnoValue = findViewById(R.id.zMagnoValue);
+
+        light = findViewById(R.id.light);
+        pressure = findViewById(R.id.pressure);
+        temp = findViewById(R.id.temperature);
+
+
     }
 
     public void refreshData(View v) {
