@@ -1,9 +1,12 @@
 package com.qualitysoftware.secondapplication;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -18,7 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class SensorsActivity extends AppCompatActivity {
+public class SensorsActivity extends AppCompatActivity implements SensorEventListener {
 
     private Button refreshButton;
     private TextView coordsTextView;
@@ -44,7 +47,7 @@ public class SensorsActivity extends AppCompatActivity {
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                coordsTextView.append("\n " + location.getLongitude() + " " + location.getLatitude());
+                coordsTextView.setText("Long " + location.getLongitude() + " Lat " + location.getLatitude());
             }
 
             @Override
@@ -80,7 +83,74 @@ public class SensorsActivity extends AppCompatActivity {
         pressure = findViewById(R.id.pressure);
         temp = findViewById(R.id.temperature);
 
+        sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        sAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if(sAccelerometer != null)
+            sensorManager.registerListener(this, sAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        else
+            xValue.setText("Accelerometer failed to init");
 
+        sGyro = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        if(sGyro != null)
+            sensorManager.registerListener(this, sGyro, SensorManager.SENSOR_DELAY_NORMAL);
+        else
+            xGyroValue.setText("Gyroscope failed to init");
+
+        sMagno = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        if(sMagno != null)
+            sensorManager.registerListener(this, sMagno, SensorManager.SENSOR_DELAY_NORMAL);
+        else
+            xMagnoValue.setText("Magnetic Field sensor failed to init");
+
+        sPressure = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
+        if(sPressure != null)
+            sensorManager.registerListener(this, sPressure, SensorManager.SENSOR_DELAY_NORMAL);
+        else
+            pressure.setText("Pressure sensor failed to init");
+
+        sLight = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
+        if(sLight != null)
+            sensorManager.registerListener(this, sLight, SensorManager.SENSOR_DELAY_NORMAL);
+        else
+            light.setText("Light sensor failed to init");
+
+        sTemp = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+        if(sTemp != null)
+            sensorManager.registerListener(this, sTemp, SensorManager.SENSOR_DELAY_NORMAL);
+        else
+            temp.setText("Failed");
+
+    }
+
+    public void onSensorChanged(SensorEvent event) {
+        Sensor eventSensor = event.sensor;
+        if(eventSensor.getType() == Sensor.TYPE_ACCELEROMETER){
+            xValue.setText("X" + event.values[0]);
+            yValue.setText("Y" + event.values[1]);
+            zValue.setText("Z" + event.values[2]);
+        }
+        else if(eventSensor.getType() == Sensor.TYPE_GYROSCOPE){
+            xGyroValue.setText("X" + event.values[0]);
+            yGyroValue.setText("Y" + event.values[1]);
+            zGyroValue.setText("Z" + event.values[2]);
+        }
+        else if(eventSensor.getType() == Sensor.TYPE_MAGNETIC_FIELD){
+            xMagnoValue.setText("X" + event.values[0]);
+            yMagnoValue.setText("Y" + event.values[1]);
+            zMagnoValue.setText("Z" + event.values[2]);
+        }
+        else if(eventSensor.getType() == Sensor.TYPE_PRESSURE){
+            pressure.setText(event.values[0] + "mbar");
+        }
+        else if(eventSensor.getType() == Sensor.TYPE_LIGHT){
+            light.setText(event.values[0] + "lx");
+        }
+        else if(eventSensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE){
+            temp.setText(event.values[0] + "°C");
+        }
+    }
+
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
     public void refreshData(View v) {

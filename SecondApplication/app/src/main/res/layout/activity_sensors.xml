@@ -7,13 +7,21 @@
     tools:context=".SensorsActivity">
 
     <TextView
-        android:id="@+id/CoordinatesTextView"
+        android:id="@+id/CoordinatesTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Coordinates: "
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/CoordinatesTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="GPS: "
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CoordinatesTitle" />
 
     <Button
         android:id="@+id/RefreshButton"
@@ -34,6 +42,11 @@
         app:layout_constraintTop_toBottomOf="@id/RefreshButton"
         android:orientation="horizontal">
 
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Accelerometer" />
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
@@ -60,6 +73,10 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:text="Gyroscope" />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:id="@+id/xGyroValue" />
         <TextView
             android:layout_width="100dp"
@@ -83,6 +100,10 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:text="Magnetic Field" />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
             android:id="@+id/xMagnoValue" />
         <TextView
             android:layout_width="100dp"
@@ -95,12 +116,35 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/miscValues"
+        android:id="@+id/miscTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/magnoValues"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Light"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Pressure"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Temperature"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/miscValues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/miscTitle"
         android:orientation="horizontal">
 
         <TextView
