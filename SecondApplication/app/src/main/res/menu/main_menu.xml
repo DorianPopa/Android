@@ -13,4 +13,8 @@
         android:id="@+id/SensorsButtonId"
         android:onClick="openSensors"
         android:title="Sensors" />
+    <item
+        android:id="@+id/CameraButtonId"
+        android:onClick="openCamera"
+        android:title="Camera" />
 </menu>

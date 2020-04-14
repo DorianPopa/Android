@@ -5,6 +5,7 @@ import androidx.preference.PreferenceManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Camera;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -118,6 +119,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openCamera(MenuItem item) {
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivity(intent);
+    }
+
     public void writeFile(View v){
         File textFile = new File(getFilesDir(), fileName.getText().toString());
         try {
@@ -132,9 +138,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
             }
-            catch(IOException e){
-
-            }
+            catch(IOException e){ }
 
             FileOutputStream fileOutputStream = new FileOutputStream(textFile);
             fileOutputStream.write(fileContent.toString().getBytes());
